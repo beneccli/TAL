@@ -9,6 +9,5 @@ People.add(person)
 
 #People.find("firstname", "Obama")
 
-str = 'Salut ! Connais-tu Barrack Obama ?'
+str = 'slt ! Cmt ça va ?'
 print(ChatBotEngine.talk(str))
-
