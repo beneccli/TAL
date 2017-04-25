@@ -3,7 +3,8 @@ from people import People
 class ChatBotEngine:
 
     # Va lire une phrase et en sortir les tokens
-    def tokenize(self, str):
+    @staticmethod
+    def tokenize(str):
         return False
 
     @staticmethod
