@@ -4,7 +4,9 @@ from person import Person
 from people import People
 
 
-People.add(Person("Obama", "Barrack", date.today(), "Missouri", 82, 174, "New York"))
+person = Person("Obama", "Barrack", 'M', date.today(), "Missouri", 82, 174, "New York")
+People.add(person)
+
 #People.find("firstname", "Obama")
 
 str = 'Salut ! Connais-tu Barrack Obama ?'
