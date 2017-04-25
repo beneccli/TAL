@@ -39,3 +39,5 @@ Thumbs.db
 # Custom TAL project #
 ######################
 __pycache__/
+.idea/
+main.py
