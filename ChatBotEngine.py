@@ -6,7 +6,7 @@ import os
 class ChatBotEngine:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     nltk.data.path.append(BASE_DIR + '/nltk_data/')
-    tags = {}
+    dict_tags = {} # Dictionary
 
     def __init__(self):
         # Get all known tags
@@ -15,21 +15,22 @@ class ChatBotEngine:
         for l in lines:
             if l != '':
                 l = l.split(':')
-                self.tags[l[0]] = l[1]
+                self.dict_tags[l[0]] = l[1]
 
         return
 
     # Try to find the intent of a list of tokens = sentence (is it a question etc)
-    def findIntent(self, tokens):
+    def find_intent(self, tokens):
         tokens_tagified = self.tagify(tokens)
+        print(tokens_tagified)
         return 'NoIntent'
 
     # Search for tags of each token
     def tagify(self, tokens):
         tags = []
         for token in tokens:
-            if token.lower() in self.tags:
-                tags.append([token.lower(), self.tags[token.lower()]])
+            if token.lower() in self.dict_tags:
+                tags.append([token.lower(), self.dict_tags[token.lower()]])
             else:
                 # Tag is not found doesn't mean we can't find tags inside the token
                 # So let's try to find some way to tag it
@@ -37,19 +38,11 @@ class ChatBotEngine:
                     tmp = token.split('\'')
                     if len(tmp) == 2:
                         if tmp[0] == 'd':
-                            tags.append(['de', self.tags['de']])
-                            if tmp[1] in self.tags: # Don't use lower() here coz this token can't be the start of the
-                                                    # sentence, so if there is a uppercase is must be a proper noun
-                                tags.append([tmp[1], self.tags[tmp[1]]])
-                            else:
-                                tags.append([tmp[1], 'X'])
+                            tags.append(['de', self.dict_tags['de']])
+                            self.find_tag(tmp[1], tags)
                         elif tmp[0] == 'l':
-                            tags.append(['le', self.tags['le']])
-                            if tmp[1] in self.tags: # Don't use lower() here coz this token can't be the start of the
-                                                    # sentence, so if there is a uppercase is must be a proper noun
-                                tags.append([tmp[1], self.tags[tmp[1]]])
-                            else:
-                                tags.append([tmp[1], 'X'])
+                            tags.append(['le', self.dict_tags['le']])
+                            self.find_tag(tmp[1], tags)
                     else:
                         tags.append([token.lower(), 'X'])
 
@@ -58,19 +51,20 @@ class ChatBotEngine:
                     # that use a '-' inside (assuming we have all words in our dict)
                     tmp = token.split('-')
                     for tk in tmp:
-                        if tk.lower() in self.tags:
-                            tags.append([tk.lower(), self.tags[tk.lower()]])
-                        else:
-                            tags.append([tk, 'X'])
+                        self.find_tag(tk, tags, True)
 
                 else:
                     tags.append([token.lower(), 'X'])
 
-        print(tags)
-        return
+        return tags
 
-    def findTag(self, token):
-        return
+    def find_tag(self, token, tags, lowercase = False):
+        if lowercase and token.lower() in self.dict_tags:
+            tags.append([token.lower(), self.dict_tags[token.lower()]])
+        elif not lowercase and token in self.dict_tags:
+            tags.append([token, self.dict_tags[token]])
+        else:
+            tags.append([token, 'X'])
 
     # Core method where all mechanics are involved
     def talk(self, str):
@@ -79,5 +73,5 @@ class ChatBotEngine:
         intent = []
         for sentence in sentences:
             tokens.append(nltk.word_tokenize(sentence, "french"))
-            intent.append(self.findIntent(tokens[-1]))
+            intent.append(self.find_intent(tokens[-1]))
         return
