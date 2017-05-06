@@ -25,7 +25,6 @@ INTRODUCTION AU TAL
 \bigbreak
 
 \begin{enumerate}
-
 \item \textbf{Spécifications}
 \bigbreak
 \raggedright
@@ -48,24 +47,24 @@ Sujets abordables concernant la personnalité :
 \item Conversation type :
   \begin{itemize}
   \item Exemple 1 : \\
-Humain : Salut ! Je cherche quelqu’un qui a les cheveux blonds. Tu as une idée ? \\
+Humain : Salut ! Je cherche quelqu’un qui a les cheveux blonds. Vous avez une idée ? \\
 Bot : Bien-sûr, pouvez-vous être plus précis ?\\
 Humain : Cette personne a entre 30 et 50 ans et est un garçon.\\
-Bot : Je pense à Chris Evans et Ryan Gosling, la personne que vous cherchez est-elle parmis elles ?\\
+Bot : Je pense à Chris Evans et Ryan Gosling, la personne que vous cherchez est-elle parmi elles ?\\
 Humain : Oui c’était Chris Evans, merci !\\
 Bot : De rien.
 \smallbreak
 \item Exemple 2 :\\
-    Humain : Yo, tu sais qui est Obama ?\\
+    Humain : Bonjour, savez vous qui est Obama ?\\
     Bot : Vous parlez peut-être de Barrack Obama ?\\
     Humain : Oui !\\
     Humain : Combien d’enfants a-t-il ?\\
     Bot : Il a 2 enfants.\\
-    Humain : Ok et il a quel âge ?\\
+    Humain : D'accord et il a quel âge ?\\
     Bot : il a 55 ans.\\
     Humain : Et sa fille la plus âgée mesure-t-elle plus de 1,70 mètres ?\\
     Bot : Oui, elle mesure 1,74 mètres.\\
-    Humain : Ok merci, au revoir !\\
+    Humain : D'accord merci, au revoir !\\
     Bot : Au revoir\\
 \end{itemize}   
 
@@ -88,19 +87,73 @@ Bot : De rien.
 \raggedright
 \setlength{\parindent}{0,5cm}
 
-\sloppy
+
 Afin de faciliter notre travail et de nous permettre de nous focaliser sur l’essentiel on a décidé d’utiliser la librairie NTLK. Celle-ci nous permet de travailler des phrases et d’en ressortir des informations qui nous intéressent.
 \bigbreak
-\sloppy
 Dans le cadre de notre projet on s’est limité à une utilisation basique de la librairie. En effet celle-ci pourrait nous permettre de créer des arbres donnant la logique d’une phrase avec, pour chaque mot, sa signification grammaticale. De plus il existe des packages plus ou moins variés permettant toute sorte d’opération comme par hasard comprendre si une phrase est plutôt positive ou négative. Une limitation de la librairie est le langage utilisé. Ici on choisi de travailler sur du français, ainsi il y a un certain nombre de possibilités qui nous sont plus difficilement accessibles.
 \bigbreak
-\sloppy
+\begin{sloppypar}
 On a décidé d’utiliser deux fonctions de cette librairie. La première est $sent_tokenize()$, une fonction permettant de séparer un texte composé de phrases en plusieurs phrases, ceci facilitant la compréhension de ce texte. La deuxième est $word_tokenize()$, cette fois-ci permettant de créer correctement tous les tokens de la phrase. C’est tout.
+\end{sloppypar}
 \bigbreak
-\sloppy
-Une autre piste que l’on a évaluée est la possibilité de taguer chaque mot en son sens grammatical (verbe, nom commun, complément d’objet, etc.). Par défaut nltk ne le permet pas avec ses packages pour la langue française, cependant en creusant le sujet on a pu découvrir un travail réalisé à Stanford avec le Stanford Log-linear Part-Of-Speech Tagger, un bout de programme écrit en Java permettant l’assignation du sens grammatical des mots en français. De plus Nitin Madnani a écrit une interface python-java pour ce bout de programme permettant de faire le lien avec NTLK. Ainsi, d’une manière détournée, on aurait pu tagguer automatiquement les mots et, pourquoi pas, en créer des arbres. Cependant on a souhaité ne pas se mâcher tout le travail même si cela reste très intéressant du point de vue praticité. Donc on s’est limité aux deux premières fonctions citées plus haut.
+\begin{sloppypar}
+Une autre piste que l’on a évalué est la possibilité de taguer chaque mot en son sens grammatical (verbe, nom commun, complément d’objet, etc.). Par défaut nltk ne le permet pas avec ses packages pour la langue française, cependant en creusant le sujet on a pu découvrir un travail réalisé à Stanford avec le Stanford Log-linear Part-Of-Speech Tagger, un bout de programme écrit en Java permettant l’assignation du sens grammatical des mots en français. De plus Nitin Madnani a écrit une interface python-java pour ce bout de programme permettant de faire le lien avec NTLK. Ainsi, d’une manière détournée, on aurait pu tagguer automatiquement les mots et, pourquoi pas, en créer des arbres. Cependant on a souhaité ne pas se mâcher tout le travail même si cela reste très intéressant du point de vue praticité. Donc on s’est limité aux deux premières fonctions citées plus haut.
 
+\end{sloppypar}
 \end{enumerate}
+\bigbreak
+\textbf{Tableau des Tags <-> signification <-> exemples)} \\
+\begin{tabular}{|c|c|c|}
+
+\hline
+
+Tag & Signification & Examples \\
+
+\hline
+
+ADJ & adjectif & nouveau, bien, haut, spécial, grand, local \\
+
+\hline
+
+ADP & préposition & sur, de, avec, dans, sous \\
+
+\hline
+
+ADV & vraiment & déjà, encore, tôt, maintenant, grand, local \\
+\hline
+
+CONJ & conjonction & et, ou, mais, si, grand, tant que, bien que \\
+\hline
+
+DET & determiner, article & le, un, quelque, plupart, chaque, aucun \\
+\hline
+
+NOUN & nom & année, maison, coûts, temps, Afrique \\
+\hline
+
+NUM & numeros & vingt-quatre, quatrième, 1991, 14:24 \\
+\hline
+
+PRT & article & à, bi, haut, spécial, grand, local \\
+\hline
+
+PRON & pronom & nouveau, bien, haut, spécial, grand, local \\
+\hline
+
+VERB & verbe & nouveau, bien, haut, spécial, grand, local \\
+\hline
+
+. & ponctuation & nouveau, bien, haut, spécial, grand, local \\
+\hline
+
+X & autre & nouveau, bien, haut, spécial, grand, local \\
+\hline
+
+PN & nom propre & nouveau, bien, haut, spécial, grand, local \\
+
+\hline
+
+\end{tabular}
 \end{document}
 
 	
