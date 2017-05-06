@@ -100,7 +100,7 @@ On a décidé d’utiliser deux fonctions de cette librairie. La première est $
 Une autre piste que l’on a évalué est la possibilité de taguer chaque mot en son sens grammatical (verbe, nom commun, complément d’objet, etc.). Par défaut nltk ne le permet pas avec ses packages pour la langue française, cependant en creusant le sujet on a pu découvrir un travail réalisé à Stanford avec le Stanford Log-linear Part-Of-Speech Tagger, un bout de programme écrit en Java permettant l’assignation du sens grammatical des mots en français. De plus Nitin Madnani a écrit une interface python-java pour ce bout de programme permettant de faire le lien avec NTLK. Ainsi, d’une manière détournée, on aurait pu tagguer automatiquement les mots et, pourquoi pas, en créer des arbres. Cependant on a souhaité ne pas se mâcher tout le travail même si cela reste très intéressant du point de vue praticité. Donc on s’est limité aux deux premières fonctions citées plus haut.
 
 \end{sloppypar}
-\end{enumerate}
+
 \bigbreak
 \textbf{Tableau des Tags <-> signification <-> exemples)} \\
 \begin{tabular}{|c|c|c|}
@@ -125,7 +125,7 @@ ADV & vraiment & déjà, encore, tôt, maintenant, grand, local \\
 CONJ & conjonction & et, ou, mais, si, grand, tant que, bien que \\
 \hline
 
-DET & determiner, article & le, un, quelque, plupart, chaque, aucun \\
+DET & determinant, article & le, un, quelque, plupart, chaque, aucun \\
 \hline
 
 NOUN & nom & année, maison, coûts, temps, Afrique \\
@@ -153,7 +153,52 @@ PN & nom propre & Obama, Valentin, Paris, Mulhouse \\
 
 \hline
 
+IADJ & adjectif interrogatif & c'est, quel, qui, quand, quoi \\
+
+\hline
+
+
+
 \end{tabular}
+
+\bigbreak
+\item \textbf{Contribution de chacun des membres du groupe} \\
+\textbf{Théo :} \\
+\begin{itemize}
+\item codage d'un premier tokenisateur (rendu inutile par l'utilisation de la librairie NLTK)
+\item Recherche de solutions accessibles à notre niveaux afin de générer les réponses du bot de manière contextuelle
+\item Complétion du dictionnaire d'équivalence token <-> tag
+\end{itemize}
+\bigbreak
+\textbf{Raihane :} \\ 
+\begin{itemize}
+\item Recherche d'informations sur les célébrités et mise en place du fichier contenant la base de données sur ces personnages.
+\item Recherche, compréhension et apprentissage de LaTeX 
+\item Ecriture du rapport en LaTeX
+\end{itemize}
+\bigbreak
+\textbf{Benoît :}  \\
+\begin{itemize}
+\item Moteur du programme ChatBotEngine
+\item Tokenisation
+\end{itemize}
+\bigbreak
+\item \textbf{Objectifs réalisés } \\
+\begin{itemize}
+\item Tokenisation
+\item Traduction en TAG
+\item Fonctions de recherche dans la base de données
+\end{itemize}
+
+\bigbreak
+\item \textbf{Limitations du programme} \\
+\begin{itemize}
+\item Génération de réponses contextuelles
+
+\end{itemize}
+\end{enumerate}
+
+
 \end{document}
 
 	
