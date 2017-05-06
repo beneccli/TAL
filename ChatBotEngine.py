@@ -23,7 +23,21 @@ class ChatBotEngine:
     def find_intent(self, tokens):
         tokens_tagified = self.tagify(tokens)
         print(tokens_tagified)
-        return 'NoIntent'
+
+        # Find a question
+        if tokens_tagified[0][1] == 'VERB' and tokens_tagified[1][1] == 'PRON':
+            return 'question'
+        for token_tagified in tokens_tagified:
+            if token_tagified[1] == 'IADJ':
+                return 'question'
+
+        return 'unknown'
+
+    # Try to understand the question and then to answer it
+    def answer_question(self, tokens):
+
+
+        return
 
     # Search for tags of each token
     def tagify(self, tokens):
@@ -70,8 +84,11 @@ class ChatBotEngine:
     def talk(self, str):
         sentences = nltk.sent_tokenize(str, "french")  # On découpe en phrase
         tokens = []
-        intent = []
         for sentence in sentences:
             tokens.append(nltk.word_tokenize(sentence, "french"))
-            intent.append(self.find_intent(tokens[-1]))
-        return
+            intent = self.find_intent(tokens[-1])
+
+            if intent == 'question':
+                print(self.answer_question(tokens[-1]))
+
+        return ''
