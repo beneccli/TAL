@@ -37,7 +37,7 @@ class ChatBotEngine:
     def answer_question(self, tokens):
 
 
-        return
+        return 'Trying to answer your question...'
 
     # Search for tags of each token
     def tagify(self, tokens):
